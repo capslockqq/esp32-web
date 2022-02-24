@@ -12,7 +12,7 @@
 
 	"forwardPorts": [
 		// PIO Home is blank if its port isn't exosed from within the container.
-		8008
+		8008, 3000
 	],
 
 	"runArgs": [
