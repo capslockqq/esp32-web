@@ -1,0 +1,7 @@
+{
+    "name": "freertos",
+    "version": "1.0.0",
+    "build": {
+        "extraScript": "extra_script.py"
+    }
+}

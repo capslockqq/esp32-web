@@ -1,0 +1,12 @@
+{
+    "parameters": [
+        {
+            "id": "some id",
+            "new_value":23
+        },
+        {
+            "id": "mande",
+            "new_value":10
+        }
+        ]
+}

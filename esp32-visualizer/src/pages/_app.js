@@ -18,7 +18,7 @@ const App = (props) => {
     <CacheProvider value={emotionCache}>
       <Head>
         <title>
-          Material Kit Pro
+          ESP32 - Visualizer
         </title>
         <meta
           name="viewport"

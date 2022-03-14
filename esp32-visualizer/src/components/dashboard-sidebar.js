@@ -21,6 +21,11 @@ const items = [
     title: 'Dashboard'
   },
   {
+    href: '/parameters',
+    icon: (<LockIcon fontSize="small" />),
+    title: 'Parameters'
+  },
+  {
     href: '/settings',
     icon: (<CogIcon fontSize="small" />),
     title: 'Settings'

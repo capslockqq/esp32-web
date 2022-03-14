@@ -59,6 +59,13 @@
         "thread": "c",
         "cinttypes": "c",
         "typeinfo": "c",
-        "iostream": "cpp"
+        "iostream": "cpp",
+        "*.ipp": "cpp",
+        "any": "cpp",
+        "forward_list": "cpp",
+        "iomanip": "cpp",
+        "valarray": "cpp",
+        "variant": "cpp",
+        "unordered_set": "cpp"
     }
 }
