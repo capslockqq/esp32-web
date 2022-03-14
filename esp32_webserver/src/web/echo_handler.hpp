@@ -44,12 +44,8 @@ public:
 
     void sendTest()
     {
-        while (1)
-        {
-            for (auto it : m_connections) {
-                m_server.send(it, "TEEEEEST", websocketpp::frame::opcode::text);
-            }
-            std::this_thread::sleep_for(std::chrono::seconds(1));
+        for (auto it : m_connections) {
+            m_server.send(it, "TEEEEEST", websocketpp::frame::opcode::text);
         }
     }
 };

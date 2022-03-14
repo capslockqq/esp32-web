@@ -159,7 +159,8 @@ void app_main(void)
     ESP_ERROR_CHECK(example_connect());
     xTaskCreate(&some_function, "get_unixtime", 8192, NULL, 5, NULL);
     HttpServerInterface *http_server_implementation = new HttpServer();
-    start_app(http_server_implementation);
+    ProgramContainer program(http_server_implementation);
+    program.start_appplications();
 }
 
 void start_threads()

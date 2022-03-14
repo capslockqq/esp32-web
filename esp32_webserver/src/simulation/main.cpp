@@ -6,28 +6,46 @@
 #include <include/task.h>
 #include <time_system.hpp>
 #include <web/echo_handler.hpp>
+#include "simulation.hpp"
+#include <application/application.hpp>
 
-void static hej()
+HttpServerInterface *http_server = new HttpServer();
+ProgramContainer program(http_server);
+
+
+void static run_app()
 {
-    HttpServerInterface *http_server = new HttpServer();
     std::time_t result = std::time(nullptr);
     TimeSystem::set_initial_unixtime(result);
-    start_app(http_server);
+    program.start_appplications();
+}
+
+void some_thread(broadcast_server* server) {
+    auto applications = program.get_applications();
+    auto application = applications.at(0);
+    std::mutex *m = application->get_mutex();
+    std::condition_variable *cv = application->get_conditional();
+    while(1) {
+        std::unique_lock<std::mutex> lk(*m);
+        cv->wait(lk);
+        server->sendTest();
+        cv->notify_one();
+    }
 }
 
 int main()
-{
-
-    broadcast_server server;
-
-    std::thread senderThread([&server]()
-                             { server.sendTest(); });
-
-    std::thread hej2(hej);
-
-    server.run(9002);
-    hej2.join();
-    senderThread.join();
+{   
+    std::condition_variable cv;
+    std::mutex m;
+    HttpServerInterface *implementaion = new HttpServer();
+    ApplicationInterface *application = new Application("Name", implementaion, &cv, &m);
+    ApplicationInterface* SimulationApplication = new Simulation(&cv, &m);
+    program.add_application(application);
+    program.add_application(SimulationApplication);
+    std::thread app_thread(run_app);
+    auto simulation = static_cast<Simulation*>(SimulationApplication);
+    simulation->start_websocket();
+    app_thread.join();
     return 0;
 }
 
