@@ -8,7 +8,8 @@ class Input : public ValueSystem<T>
 {
 public:
     Input() : ValueSystem<T>() {}
-    Input(std::string name, std::string id, T value, std::string unit = "") : ValueSystem<T>(name, id, value, unit)
-    {
-    }
+    Input(std::string name, std::string id, T value, std::string unit = "");
 };
+
+using InputTypes = std::variant<Input<int>*, Input<float>*, Input<double>*, Input<std::string>*>;
+using InputList = std::map<std::string, InputTypes>;

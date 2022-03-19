@@ -2,3 +2,5 @@
 .vscode/.browse.c_cpp.db*
 .vscode/ipch
 esp32_webserver/src/CMakeLists.txt
+.vscode/settings.json
+.vscode/settings.json

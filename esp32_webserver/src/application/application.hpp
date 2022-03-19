@@ -2,19 +2,18 @@
 #include <string>
 #include <http_server_interface.hpp>
 #include <application/application_interface.hpp>
+#include <application/notify.hpp>
 #include <output.hpp>
 #include <input.hpp>
 
-class Application : public ApplicationInterface
+class Application : public ApplicationInterface, public Notify
 {
 public:
-    Application(std::string name, HttpServerInterface *http_server_implementation, std::condition_variable *cv, std::mutex *m);
+    Application(std::string name, HttpServerInterface *http_server_implementation);
+    Application(std::string name, HttpServerInterface *http_server_implementation, ApplicationInterface *application);
     void Update();
 
 private:
     HttpServerInterface *_http_server_implementation;
-    Output<int> _output;
-    Input<int> _input;
-    Parameter<int> param1;
-
+    Parameter<int> _sample_frequency;
 };

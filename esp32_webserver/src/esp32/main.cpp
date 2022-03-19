@@ -4,6 +4,7 @@
 // #include "tes.hpp"
 #include <parameter.hpp>
 #include <esp_http_client.h>
+#include <application/application.hpp>
 
 #include <string.h>
 #include <stdlib.h>
@@ -134,12 +135,12 @@ void some_function(void *pv)
     int err = esp_http_client_perform(client);
     if (err == ESP_OK)
     {
-            ESP_LOGI(TAG, "HTTP GET Status = %d, content_length = %d",
-                     esp_http_client_get_status_code(client),
-                     esp_http_client_get_content_length(client));
-            std::string raw_response = local_response_buffer;
-            nlohmann::json json_response = nlohmann::json::parse(raw_response);
-            TimeSystem::set_initial_unixtime(static_cast<long long int>(json_response["unixtime"]));
+        ESP_LOGI(TAG, "HTTP GET Status = %d, content_length = %d",
+                 esp_http_client_get_status_code(client),
+                 esp_http_client_get_content_length(client));
+        std::string raw_response = local_response_buffer;
+        nlohmann::json json_response = nlohmann::json::parse(raw_response);
+        TimeSystem::set_initial_unixtime(static_cast<long long int>(json_response["unixtime"]));
     }
 
     esp_http_client_cleanup(client);
@@ -159,7 +160,9 @@ void app_main(void)
     ESP_ERROR_CHECK(example_connect());
     xTaskCreate(&some_function, "get_unixtime", 8192, NULL, 5, NULL);
     HttpServerInterface *http_server_implementation = new HttpServer();
+    ApplicationInterface *application = new Application("Name", http_server_implementation);
     ProgramContainer program(http_server_implementation);
+    program.add_application(application);
     program.start_appplications();
 }
 

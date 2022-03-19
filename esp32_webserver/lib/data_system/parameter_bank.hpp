@@ -9,19 +9,17 @@ class ParameterBank
 {
 public:
     static ParameterBank *get_instance();
-    ParamList* get_parameters();
+    ParamList *get_parameters();
     void set_parameter_if_found(nlohmann::json param);
     template <class T>
     void store_parameter(Parameter<T> *param)
     {
-        {
-            _parameters[param->get_id()] = *param;
-        }
+        _parameters[param->get_id()] = *param;
     }
 
 private:
-    inline static ParameterBank* _ptr = nullptr;
+    inline static ParameterBank *_ptr = nullptr;
     ParameterBank();
     ParamList _parameters;
-    inline static nlohmann::json latest_value {};
+    inline static nlohmann::json latest_value{};
 };

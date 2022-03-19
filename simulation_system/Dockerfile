@@ -1,0 +1,1 @@
+FROM czentye/matplotlib-minimal

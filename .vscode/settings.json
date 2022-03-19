@@ -3,6 +3,9 @@
         "*.ipp": "cpp",
         "*.tcc": "cpp",
         "cstdlib": "cpp",
-        "map": "cpp"
+        "map": "cpp",
+        "condition_variable": "cpp",
+        "chrono": "cpp",
+        "string": "cpp"
     }
 }
