@@ -5,6 +5,8 @@
 	"settings": {
 		"terminal.integrated.shell.linux": "/bin/bash"
 	},
+
+	"postCreateCommand": "python3 -m pip install -r simulation_system/requirements.txt",
 	// Add the IDs of extensions you want installed when the container is created.
 	"extensions": [
 		"ms-vscode.cpptools",
@@ -21,11 +23,16 @@
 	"runArgs": [
 		// --privileged grants access to /dev on host. Arduino will most likely be /dev/ttysN
 		"--privileged",
-		"--env=DISPLAY"
+		"--env=DISPLAY=:1",
+		"--net=host"
 	],
 	"remoteUser": "vscode",
 	"mounts": [
 		// Mount the host's device to this container's.
-		"source=/dev,target=/dev,type=bind,consistency=consistent"
-	]
+		"source=/dev,target=/dev,type=bind,consistency=consistent",
+		"source=/tmp/.X11-unix,target=/tmp/.X11-unix,type=bind,consistency=consistent"
+	],
+	"containerEnv": {
+		"DISPLAY": "1"
+	}
 }

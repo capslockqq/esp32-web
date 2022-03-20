@@ -7,12 +7,24 @@
 #include <time_system.hpp>
 #include <web/echo_handler.hpp>
 #include "simulation.hpp"
+#include <application_interface.hpp>
 #include <application/application.hpp>
 #include <io_bank.hpp>
-#include <application/application_binding.hpp>
+#include <application_binding.hpp>
 
 HttpServerInterface *http_server = new HttpServer();
 ProgramContainer program(http_server);
+HttpServerInterface *Implementaion = new HttpServer();
+ApplicationInterface *SimulationApplication = new Simulation();
+ApplicationInterface *application_interface = new Application("Name", Implementaion, SimulationApplication);
+auto simulation = static_cast<Simulation *>(SimulationApplication);
+
+
+void stop_websocket(int sig) {
+    std::cout << "STOPPING WEBSOCKET!!" << std::endl;
+    simulation->stop();
+    exit(1);
+}
 
 
 void static run_app()
@@ -24,13 +36,18 @@ void static run_app()
 
 int main()
 {
-    HttpServerInterface *Implementaion = new HttpServer();
-    ApplicationInterface *SimulationApplication = new Simulation();
-    ApplicationInterface *application = new Application("Name", Implementaion, SimulationApplication);
-    bind_system(static_cast<Application *>(application));
-    program.add_application(application);
+    struct sigaction sigIntHandler;
+
+    sigIntHandler.sa_handler = stop_websocket;
+    sigemptyset(&sigIntHandler.sa_mask);
+    sigIntHandler.sa_flags = 0;
+
+    sigaction(SIGINT, &sigIntHandler, NULL);
+
+    auto application = static_cast<Application*>(application_interface);
+
+    program.add_application(application_interface);
     std::thread app_thread(run_app);
-    auto simulation = static_cast<Simulation *>(SimulationApplication);
     simulation->setup();
     simulation->start_websocket();
     app_thread.join();

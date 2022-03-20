@@ -3,10 +3,11 @@
 #include <condition_variable>
 #include <mutex>
 #include <web/echo_handler.hpp>
-#include <application/application_interface.hpp>
+#include <application_interface.hpp>
 #include <output.hpp>
 #include <input.hpp>
 #include <json.hpp>
+#include <iostream>
 
 using OutputData = std::map<std::string, std::variant<Output<int>*, Output<float>*, Output<double>*, Output<std::string>*>>;
 using InputData = std::map<std::string, std::variant<Input<int>*, Input<float>*, Input<double>*, Input<std::string>*>>;
@@ -15,6 +16,7 @@ class Simulation : public ApplicationInterface
 {
 public:
     Simulation();
+    void stop();
     void setup();
     void Update();
     void start_websocket();

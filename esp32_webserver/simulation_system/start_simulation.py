@@ -1,5 +1,5 @@
 import subprocess
-import os 
+import os
 dir_path = os.path.dirname(os.path.realpath(__file__))
 
 # application_process = subprocess.Popen(f'')

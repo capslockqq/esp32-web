@@ -9,7 +9,7 @@ rel.safe_read()
 class WebsocketInterface:
     def __init__(self, on_message_callback) -> None:
         self.on_message_callback = on_message_callback
-        self.ws = websocket.WebSocketApp("ws://127.0.0.1:9004",
+        self.ws = websocket.WebSocketApp("ws://127.0.0.1:9011",
                                     on_open=self.on_open,
                                     on_message=self.on_message,
                                     on_error=self.on_error,

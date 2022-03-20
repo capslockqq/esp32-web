@@ -1,8 +1,8 @@
 #pragma once
 #include <string>
 #include <http_server_interface.hpp>
-#include <application/application_interface.hpp>
-#include <application/notify.hpp>
+#include <application_interface.hpp>
+#include <notify.hpp>
 #include <output.hpp>
 #include <input.hpp>
 

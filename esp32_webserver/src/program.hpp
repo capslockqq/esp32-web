@@ -11,7 +11,7 @@
 #include <source/portable/portmacro.h>
 #define portTICK_PERIOD_MS 1
 #endif
-#include <application/application_interface.hpp>
+#include <application_interface.hpp>
 
 class ProgramContainer {
     public:

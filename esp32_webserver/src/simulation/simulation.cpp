@@ -1,12 +1,18 @@
 #include "simulation.hpp"
 #include <iostream>
 #include <io_bank.hpp>
+#include <ctime>
+#include <cstdlib>
 
 Simulation::Simulation() : ApplicationInterface("Simulation system", 0),
                            simulation_length("Simulation length", "simulation-length", 30, "seconds"),
                            simulation_ticks("Simulation ticks", "simu-ticks", 0, "samples")
 {
     _server = new broadcast_server();
+}
+
+void Simulation::stop() {
+    _server->stop();
 }
 
 void Simulation::setup()
@@ -58,12 +64,12 @@ void Simulation::Update()
     }
 
     _server->done_simulating = false;
-    simulation_ticks.set_value(ticks++);
+    simulation_ticks.set_value(rand() % 10);
 }
 
 void Simulation::start_websocket()
 {
-    _server->run(9003);
+    _server->run(9011);
 }
 
 nlohmann::json Simulation::generate_payload()

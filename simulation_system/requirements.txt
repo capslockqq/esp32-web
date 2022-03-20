@@ -2,3 +2,4 @@ rel
 websocket-client
 matplotlib
 gpg
+psutil

@@ -5,6 +5,9 @@
 #include <websocketpp/config/asio_no_tls.hpp>
 #include <websocketpp/server.hpp>
 #include <json.hpp>
+#include <boost/asio.hpp>
+
+
 
 typedef websocketpp::server<websocketpp::config::asio> server;
 
@@ -27,6 +30,13 @@ public:
         m_server.set_open_handler(bind(&broadcast_server::on_open, this, ::_1));
         m_server.set_close_handler(bind(&broadcast_server::on_close, this, ::_1));
         m_server.set_message_handler(bind(&broadcast_server::on_message, this, ::_1, ::_2));
+    }
+
+    void stop() {
+        m_server.stop_listening();
+        for (auto &connection: m_connections) {
+            m_server.close(connection, websocketpp::close::status::normal, "Server stopping");
+        }
     }
 
     void on_open(connection_hdl hdl)
