@@ -1,5 +1,4 @@
 #pragma once
-#include <iostream>
 #include <set>
 #include <thread>
 #include <websocketpp/config/asio_no_tls.hpp>

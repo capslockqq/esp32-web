@@ -5,10 +5,10 @@
 #include <include/FreeRTOS.h>
 #include <include/task.h>
 #include <time_system.hpp>
-#include <web/echo_handler.hpp>
+#include <echo_handler.hpp>
 #include "simulation.hpp"
 #include <application_interface.hpp>
-#include <application/application.hpp>
+#include <application.hpp>
 #include <io_bank.hpp>
 #include <application_binding.hpp>
 

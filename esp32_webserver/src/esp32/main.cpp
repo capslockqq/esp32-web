@@ -4,7 +4,7 @@
 // #include "tes.hpp"
 #include <parameter.hpp>
 #include <esp_http_client.h>
-#include <application/application.hpp>
+#include <application.hpp>
 
 #include <string.h>
 #include <stdlib.h>
@@ -160,7 +160,7 @@ void app_main(void)
     ESP_ERROR_CHECK(example_connect());
     xTaskCreate(&some_function, "get_unixtime", 8192, NULL, 5, NULL);
     HttpServerInterface *http_server_implementation = new HttpServer();
-    ApplicationInterface *application = new Application("Name", http_server_implementation);
+    ApplicationInterface *application = new Application("Name", http_server_implementation, nullptr);
     ProgramContainer program(http_server_implementation);
     program.add_application(application);
     program.start_appplications();

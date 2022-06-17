@@ -2,6 +2,7 @@
 #include <string>
 #include <http_server_interface.hpp>
 #include <application_interface.hpp>
+#include <project_name.hpp>
 #include <notify.hpp>
 #include <output.hpp>
 #include <input.hpp>
@@ -16,4 +17,6 @@ public:
 private:
     HttpServerInterface *_http_server_implementation;
     Parameter<int> _sample_frequency;
+    ProjectName _project_name;
+    
 };

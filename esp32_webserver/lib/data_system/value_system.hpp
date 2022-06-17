@@ -1,6 +1,5 @@
 #pragma once
 #include <time_system.hpp>
-#include <iostream>
 
 template <typename T>
 class ValueSystem

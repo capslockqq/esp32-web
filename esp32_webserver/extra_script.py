@@ -1,4 +1,3 @@
-import pathlib
 Import("env")
 cvars = env.Dictionary()
 
@@ -18,10 +17,7 @@ cmakeListsFileNative = """
 """
 
 with open('src/CMakeLists.txt', 'w+', encoding='utf8') as fd:
-    print('cvars!!', cvars['PIOPLATFORM'])
     if cvars['PIOPLATFORM'] == 'espressif32':
-        print('LOL ESP32 WOOP WOOP')
         fd.write(cmakeListsFileEsp32)
     if cvars['PIOPLATFORM'] == 'native':
-        print('LOL NATIVE WOOP WOOP')
         fd.write(cmakeListsFileNative)

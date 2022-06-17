@@ -18,8 +18,8 @@ def kill(proc_pid):
 dir_path = os.path.dirname(os.path.realpath(__file__))
 
 
-subprocess.run(['make -C ../esp32_webserver native'], shell=True)
-application_process = subprocess.Popen('make -C ../esp32_webserver run_native', shell=True, preexec_fn=os.setsid)
+subprocess.run(['make -C esp32_webserver native'], shell=True)
+application_process = subprocess.Popen('make -C esp32_webserver run_native', shell=True, preexec_fn=os.setsid)
 simulation_process = subprocess.Popen(f'python3 {dir_path}/simple_simulation.py', shell=True, preexec_fn=os.setsid)
 plotter_process = subprocess.Popen(f'python3 {dir_path}/simulation_plotter.py', shell=True, preexec_fn=os.setsid)
 

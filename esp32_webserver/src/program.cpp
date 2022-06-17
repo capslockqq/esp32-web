@@ -1,9 +1,9 @@
 #include "program.hpp"
-#include "web/setup_webserver.hpp"
+#include <setup_webserver.hpp>
 #include <parameter_bank.hpp>
 #include <time_system.hpp>
 #include <thread>
-#include <application/application.hpp>
+#include <application.hpp>
 #include <tasks/application_tasks.hpp>
 
 void wait_for_unixtime()

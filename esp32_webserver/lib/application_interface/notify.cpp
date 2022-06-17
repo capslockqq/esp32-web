@@ -1,5 +1,4 @@
 #include "notify.hpp"
-#include <iostream>
 
 void Notify::notify_all()
 {

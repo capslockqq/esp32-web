@@ -1,6 +1,5 @@
 #include "application.hpp"
-#include <web/setup_webserver.hpp>
-#include <iostream>
+#include <setup_webserver.hpp>
 
 Application::Application(std::string name, HttpServerInterface *http_server_implementation, ApplicationInterface *application) : ApplicationInterface(name, FREQUENCY),
                                                                                                                                  Notify(application),
@@ -17,4 +16,5 @@ Application::Application(std::string name, HttpServerInterface *http_server_impl
 void Application::Update()
 {
     this->notify_all();
+    _project_name.update();
 }
